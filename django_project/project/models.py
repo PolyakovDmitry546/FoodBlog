@@ -4,7 +4,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor.fields import RichTextField
 
-# Create your models here.
+
 class Category(MPTTModel):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
@@ -49,13 +49,15 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse("post_single", kwargs={"slug": self.category.slug, "post_slug": self.slug})
-    
+
     def get_recipes(self):
         return self.recipe.all()
-    
+
+    def get_comments(self):
+        return self.comment.all()
 
 
 class Recipe(models.Model):
@@ -77,8 +79,9 @@ class Recipe(models.Model):
 class Comment(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
-    website = models.CharField(max_length=150)
+    website = models.CharField(max_length=150, blank=True, null=True)
     message = models.TextField(max_length=500)
+    create_at = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(
         Post,
         related_name='comment',

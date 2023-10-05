@@ -11,10 +11,9 @@ class ContactModel(models.Model):
     message = models.TextField(max_length=5000)
     create_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self) -> str:
         return f'{self.name} - {self.email}'
-    
+
 
 class ContactLink(models.Model):
     """Класс модели контактов"""
@@ -26,16 +25,16 @@ class ContactLink(models.Model):
         return self.name
 
 
-
 class About(models.Model):
     """Класс модели страницы о нас"""
 
+    name = models.CharField(max_length=100)
     text = RichTextField()
     mini_text = RichTextField()
 
     def get_first_image(self):
         return self.about_images.first()
-    
+
     def get_images(self):
         return self.about_images.all()[1:]
 

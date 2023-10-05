@@ -1,7 +1,10 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from typing import Any
 
-from project.models import Post
+from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, CreateView
+
+from project.models import Comment, Post
+from project.forms import CommentForm
 
 
 class HomeView(ListView):
@@ -21,3 +24,20 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
     slug_url_kwarg = 'post_slug'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm
+        return context
+
+
+class CreateCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+
+    def get_success_url(self) -> str:
+        return self.object.post.get_absolute_url()
+
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.post_id = self.kwargs.get('id')
+        return super().form_valid(form)
