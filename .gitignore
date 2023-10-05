@@ -162,3 +162,4 @@ cython_debug/
 
 django_project/media/*
 !django_project/media/.gitkeep
+django_project/cache/*
