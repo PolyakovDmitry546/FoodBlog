@@ -1,0 +1,8 @@
+{% load menu_tags mptt_tags %}
+
+<ul>
+    {% categories as list_category %}
+    {% for category in list_category %}
+    <li><a href="{% url 'post_list' category.slug %}">{{ category.name }}<span>{{ category.post.count }}</span></a></li>
+    {% endfor %}
+</ul>
