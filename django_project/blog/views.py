@@ -3,14 +3,14 @@ from typing import Any
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView
 
-from project.models import Comment, Post
-from project.forms import CommentForm
+from blog.models import Comment, Post
+from blog.forms import CommentForm
 
 
 class HomeView(ListView):
     model = Post
     paginate_by = 9
-    template_name = 'project/home.html'
+    template_name = 'blog/home.html'
 
 
 class PostListView(ListView):

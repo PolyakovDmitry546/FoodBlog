@@ -1,6 +1,6 @@
 from django import forms
 
-from project.models import Comment
+from blog.models import Comment
 
 
 class CommentForm(forms.ModelForm):
@@ -11,5 +11,5 @@ class CommentForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'placeholder': 'name'}),
             'email': forms.EmailInput(attrs={'placeholder': 'email'}),
             'website': forms.TextInput(attrs={'placeholder': 'website'}),
-            'message': forms.Textarea(attrs={'placeholder': 'message'})       
+            'message': forms.Textarea(attrs={'placeholder': 'message'})
         }

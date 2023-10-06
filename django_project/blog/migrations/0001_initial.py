@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('rght', models.PositiveIntegerField(editable=False)),
                 ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
                 ('level', models.PositiveIntegerField(editable=False)),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='project.category')),
+                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='blog.category')),
             ],
             options={
                 'abstract': False,
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField()),
                 ('create_at', models.DateTimeField(auto_now_add=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to=settings.AUTH_USER_MODEL)),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='post', to='project.category')),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='post', to='blog.category')),
             ],
         ),
         migrations.CreateModel(
@@ -61,13 +61,13 @@ class Migration(migrations.Migration):
                 ('cook_time', models.PositiveIntegerField(default=0)),
                 ('ingredients', models.TextField()),
                 ('directions', models.TextField()),
-                ('post', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='recipe', to='project.post')),
+                ('post', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='recipe', to='blog.post')),
             ],
         ),
         migrations.AddField(
             model_name='post',
             name='tags',
-            field=models.ManyToManyField(related_name='post', to='project.tag'),
+            field=models.ManyToManyField(related_name='post', to='blog.tag'),
         ),
         migrations.CreateModel(
             name='Comment',
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
                 ('email', models.CharField(max_length=100)),
                 ('website', models.CharField(max_length=150)),
                 ('message', models.TextField(max_length=500)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comment', to='project.post')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comment', to='blog.post')),
             ],
         ),
     ]

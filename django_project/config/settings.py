@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'mptt',
     'ckeditor',
 
-    'project',
+    'blog',
     'contact',
     'gallery',
 ]

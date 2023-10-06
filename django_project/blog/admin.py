@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 
-from . import models
+from blog import models
 
 
 class RecipeInLine(admin.StackedInline):
