@@ -8,7 +8,7 @@
             <div class="sidebar__item__title">
                 <h6>About me</h6>
             </div>
-            <img src="{{ about.get_first_image.image.url }}" alt="">
+            <img src="{{ about.get_first_image.image.url }}" alt="{{ about.get_first_image.image.alt }}"/>
             {{ about.mini_text|safe }}
             <a href="{% url 'about' %}" class="primary-btn">Read more</a>
         </div>
